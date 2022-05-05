@@ -1,20 +1,56 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { useDimensions, useDeviceOrientation } from '@react-native-community/hooks';
+import LoginScreen from './app/screens/LoginScreen';
+import { Provider } from 'react-redux';
+import store from './app/redux/store';
 
 export default function App() {
+  const { landscape } = useDeviceOrientation();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    // <View style={{
+    //   backgroundColor: "red",
+    //   width: "100%",
+    //   height: landscape ? "100%" : "50%"
+    // }}>
+    //   <Text onPress={() => console.log("you pressed")}>hello</Text>
+    //   <Image fadeDuration={5000} source={require('./assets/favicon.png')} />
+    //   <StatusBar style="auto" />
+    // </View>
+
+    // <View style={{
+    //   backgroundColor: "white",
+    //   flex: 1,
+    // }}>
+    //   <View style={{
+    //     backgroundColor: "tomato",
+    //     flex: 1
+    //   }} />
+    //   <View style={{
+    //     backgroundColor: "blue",
+    //     flex: 1
+    //   }} />
+    //   <View style={{
+    //     backgroundColor: "gold",
+    //     flex: 1
+    //   }} />
+
+
+    // </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <LoginScreen />
+      </View>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'gray',
     alignItems: 'center',
     justifyContent: 'center',
+    width: "100%",
+    height: "100%",
   },
 });
