@@ -3,7 +3,7 @@ import axiosUrl from "../../apis/axiosApi";
 import axiosApi from "../../apis/axiosApi";
 import axios from "axios";
 
-export const loginUser = (userName, password) => {
+export const loginUser = (userName, password, navigation) => {
     return async function (dispatch) {
         try {
             console.log("kkkkkkkkkkk");
@@ -26,7 +26,6 @@ export const loginUser = (userName, password) => {
             //         password: password
             //     }
             // });
-            console.log(axiosApi + '/auth/signin')
             const response = await axios({
                 method: 'post',
                 url: 'http://34.245.213.76:3000/auth/signin',
@@ -35,12 +34,16 @@ export const loginUser = (userName, password) => {
                     password: password
                 }
             });
+
             console.log(response.status);
             if (response.status == 201) {
-                console.log("mabrook")
+                console.log("mabrook");
+                dispatch({ type: ActionTypes.LOGIN, payload: response.data });
+                navigation.navigate('dashBoard');
+
             }
-        } catch ($e) {
-            if ($e.response.status == 401) {
+        } catch (e) {
+            if (e.response.status == 401) {
                 console.log("Username or password is incorrect")
             } else {
                 console.log("Somthing wrong please try again later");

@@ -3,7 +3,7 @@ import { TextInput, View, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../redux/actions/userAction';
 
-export default function LoginScreen(props) {
+export default function LoginScreen({ navigation }) {
     const [userName, setUserName] = useState([]);
     const [password, setPassword] = useState([]);
     const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export default function LoginScreen(props) {
         console.log(userName);
         console.log(password);
 
-        dispatch(loginUser(userName, password));
+        dispatch(loginUser(userName, password, navigation));
     }
     return (
         <View>
