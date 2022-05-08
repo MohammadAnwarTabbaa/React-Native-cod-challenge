@@ -1,19 +1,3 @@
-// import { ActionTypes } from "../contants/action-types";
-// const initialState = {
-//     articles: {},
-// }
-// export const articleReducer = (state = initialState, { type, payload }) => {
-//     switch (type) {
-//         case ActionTypes.FETCH_ARTIClES:
-//             return {
-//                 ...state,
-//                 articles: payload,
-//             };
-
-//         default:
-//             return state;
-//     }
-// };
 
 import { ActionTypes } from "../contants/action-types";
 let initialState = {
@@ -23,6 +7,7 @@ let initialState = {
     moreEroor: null,
     isListend: false,
     articles: [],
+    filteredArticles: [],
 }
 export const articleReducer = (state = initialState, { type, payload, data }) => {
     switch (type) {
@@ -53,6 +38,11 @@ export const articleReducer = (state = initialState, { type, payload, data }) =>
                 loading: false,
                 moreLoading: false,
                 isListend: true,
+            }
+        case ActionTypes.FILTERED_ARTICLES:
+            return {
+                ...state,
+                filteredArticles: payload
             }
 
         default:
