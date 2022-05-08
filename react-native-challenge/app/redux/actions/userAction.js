@@ -39,7 +39,7 @@ export const loginUser = (userName, password, navigation) => {
             if (response.status == 201) {
                 console.log("mabrook");
                 dispatch({ type: ActionTypes.LOGIN, payload: response.data });
-                navigation.navigate('dashBoard');
+                // navigation.navigate('dashBoard');
 
             }
         } catch (e) {
@@ -50,4 +50,10 @@ export const loginUser = (userName, password, navigation) => {
             }
         }
     };
+};
+
+export const logOut = () => {
+    return function (dispatch) {
+        dispatch({ type: ActionTypes.LOGOUT })
+    }
 };

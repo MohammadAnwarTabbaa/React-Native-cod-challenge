@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Linking } from 'react-native'
 
 
 export default function ArticleCard(props) {
@@ -28,7 +28,7 @@ export default function ArticleCard(props) {
         //     </Card>
         // </View >
         <Card>
-            <Card.Title>HELLO WORLD</Card.Title>
+            <Card.Title>{props.article && props.article.abstract}</Card.Title>
             <Card.Divider />
             <Card.Image
                 style={{ padding: 0 }}
@@ -38,8 +38,7 @@ export default function ArticleCard(props) {
                 }}
             />
             <Text style={{ marginBottom: 10 }}>
-                The idea with React Native Elements is more about component
-                structure than actual design.
+                {props.article && props.article.lead_paragraph}
             </Text>
             <Button
                 icon={
@@ -56,6 +55,9 @@ export default function ArticleCard(props) {
                     marginBottom: 0,
                 }}
                 title="Read More"
+                onPress={(e) => {
+                    Linking.openURL('https://dinersjournal.blogs.nytimes.com/2007/01/29/readers-react/')
+                }}
             />
         </Card>
 

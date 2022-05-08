@@ -1,5 +1,9 @@
 export const ActionTypes = {
     LOGIN: "LOGIN",
-    FETCH_ARTIClES: "FETCH_ARTIClES"
+    LOGOUT: "LOGOUT",
+    API_REQUEST: "API_REQUEST",
+    API_SUCCESS: "API_SUCCESS",
+    API_FAILURE: "API_FAILURE",
+    API_LIST_END: "API_LIST_END",
 
 }
