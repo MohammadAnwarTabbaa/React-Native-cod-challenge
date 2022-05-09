@@ -1,32 +1,13 @@
 import { ActionTypes } from "../contants/action-types";
-import axiosUrl from "../../apis/axiosApi";
-import axiosApi from "../../apis/axiosApi";
 import axios from "axios";
 
-export const loginUser = (userName, password) => {
+export const loginUser = (userName, password, navigation) => {
     return async function (dispatch) {
         try {
-            console.log("kkkkkkkkkkk");
+            dispatch({ type: ActionTypes.IN_PROGRESS });
             const userData = new FormData();
             userData.append("username", userName);
             userData.append("password", password);
-            console.log(userData);
-            // const response = await axiosApi.post("/auth/sigin", userData, {
-            //     headers: {
-            //         "Content-type": "application/json",
-            //         Accept: "application/json",
-            //     }
-            // // });
-            // const response = await axios('/auth/sigin', {
-            //     headers: {
-            //         "Content-type": "application/json",
-            //         Accept: "application/json",
-            //     }, data: {
-            //         username: userName,
-            //         password: password
-            //     }
-            // });
-            console.log(axiosApi + '/auth/signin')
             const response = await axios({
                 method: 'post',
                 url: 'http://34.245.213.76:3000/auth/signin',
@@ -35,16 +16,26 @@ export const loginUser = (userName, password) => {
                     password: password
                 }
             });
-            console.log(response.status);
             if (response.status == 201) {
-                console.log("mabrook")
+
+                // here we should store it in local storage to avoid logging in every time,but i did it as requirements
+
+                dispatch({ type: ActionTypes.LOGIN, payload: response.data });
             }
-        } catch ($e) {
-            if ($e.response.status == 401) {
-                console.log("Username or password is incorrect")
+        } catch (e) {
+            if (e.response.status == 401) {
+                alert("Username or password is incorrect");
+                dispatch({ type: ActionTypes.FINISH_REQUEST });
             } else {
-                console.log("Somthing wrong please try again later");
+                alert("Somthing wrong please try again later");
+                dispatch({ type: ActionTypes.FINISH_REQUEST });
             }
         }
     };
+};
+
+export const logOut = () => {
+    return function (dispatch) {
+        dispatch({ type: ActionTypes.LOGOUT })
+    }
 };

@@ -4,6 +4,8 @@ import { useDimensions, useDeviceOrientation } from '@react-native-community/hoo
 import LoginScreen from './app/screens/LoginScreen';
 import { Provider } from 'react-redux';
 import store from './app/redux/store';
+import HomeStack from './app/stack/HomeStack';
+
 
 export default function App() {
   const { landscape } = useDeviceOrientation();
@@ -38,9 +40,9 @@ export default function App() {
 
     // </View>
     <Provider store={store}>
-      <View style={styles.container}>
-        <LoginScreen />
-      </View>
+      <HomeStack>
+
+      </HomeStack>
     </Provider>
   );
 }
