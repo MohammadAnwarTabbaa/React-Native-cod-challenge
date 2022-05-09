@@ -1,44 +1,22 @@
 import React from 'react';
-import { Card, ListItem, Button, Icon } from 'react-native-elements'
-import { View, Text, Image, Linking } from 'react-native'
+import { Card, Button, Icon } from 'react-native-elements'
+import { Text, Linking } from 'react-native'
 
 
-export default function ArticleCard(props) {
+export default function ArticleCard({ article }) {
     return (
-        // <View style={{ top: 500 }}>
-        //     <Card
-        //         title='HELLO WORLD'
-        //         image={require('./icon.png')}
-        //         imageStyle={{
-        //             width: '200px',
-        //             height: '200px',
-        //             resizeMode: 'cover',
-        //             border: 'red'
-        //         }}
-        //     >
-
-
-        //         <Text style={{ marginBottom: 10 }}>
-        //             The idea with React Native Elements is more about component structure than actual design.
-        //         </Text>
-        //         <Button
-        //             icon={<Icon name='code' color='#ffffff' />}
-        //             buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-        //             title='VIEW NOW' />
-        //     </Card>
-        // </View >
         <Card>
-            <Card.Title>{props.article && props.article.abstract}</Card.Title>
+            <Card.Title>{article && article.abstract}</Card.Title>
             <Card.Divider />
             <Card.Image
                 style={{ padding: 0 }}
                 source={{
                     uri:
-                        'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+                        'https://hot-town-images.s3.amazonaws.com/kwtv/production/2022/January/19/breaking-news.1642620193378.jpeg',
                 }}
             />
-            <Text style={{ marginBottom: 10 }}>
-                {props.article && props.article.lead_paragraph}
+            <Text style={{ marginTop: 10, marginBottom: 10 }}>
+                {article && article.lead_paragraph}
             </Text>
             <Button
                 icon={
@@ -56,7 +34,7 @@ export default function ArticleCard(props) {
                 }}
                 title="Read More"
                 onPress={(e) => {
-                    Linking.openURL('https://dinersjournal.blogs.nytimes.com/2007/01/29/readers-react/')
+                    Linking.openURL(article.web_url)
                 }}
             />
         </Card>

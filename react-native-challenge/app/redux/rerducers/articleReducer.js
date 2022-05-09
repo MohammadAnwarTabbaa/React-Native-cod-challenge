@@ -44,6 +44,17 @@ export const articleReducer = (state = initialState, { type, payload, data }) =>
                 ...state,
                 filteredArticles: payload
             }
+        case ActionTypes.LOGOUT:
+            // also here i can resetting redux state with a root reducer, but i dont have much reducers    
+            return {
+                loading: false,
+                moreLoading: false,
+                error: null,
+                moreEroor: null,
+                isListend: false,
+                articles: [],
+                filteredArticles: [],
+            }
 
         default:
             return state;

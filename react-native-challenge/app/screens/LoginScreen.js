@@ -1,35 +1,32 @@
 import React, { useState } from 'react';
-import { TextInput, View, Button, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { TextInput, View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../components/Loading';
 import { loginUser } from '../redux/actions/userAction';
 
 
 export default function LoginScreen({ navigation }) {
-    const [userName, setUserName] = useState([]);
-    const [password, setPassword] = useState([]);
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [disable, setDisable] = useState(true);
+    const inProgress = useSelector((state) => state.login.inProgress);
     const dispatch = useDispatch();
     const handleLogIn = () => {
-        console.log(userName);
-        console.log(password);
-
         dispatch(loginUser(userName, password, navigation));
     }
     return (
         <View style={styles.container}>
+            <Image style={styles.image} source={require("../assets/newspaper.png")} />
             <View style={styles.inputView}>
                 <TextInput name="username" placeholder="User name" style={styles.TextInput} onChangeText={(e) => setUserName(e)} ></TextInput>
             </View>
             <View style={styles.inputView}>
                 <TextInput name="password" placeholder="Password" style={styles.TextInput} onChangeText={(e) => setPassword(e)} ></TextInput>
             </View>
-            {/* <TouchableOpacity>
-                <Text style={styles.forgot_button}>Forgot Password?</Text>
-            </TouchableOpacity> */}
-
-            <TouchableOpacity style={styles.loginBtn} onPress={handleLogIn}>
+            <TouchableOpacity style={styles.loginBtn} onPress={handleLogIn} disabled={userName == "" || password == "" || inProgress ? true : false}>
                 <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
-            {/* <Button style={styles.loginBtn} title='login' onPress={handleLogIn} /> */}
+            {inProgress ? (<Loading />) : null}
         </View>
     );
 }
@@ -48,7 +45,7 @@ const styles = StyleSheet.create({
 
     },
     inputView: {
-        backgroundColor: "#FFC0CB",
+        backgroundColor: "#03adfc",
         borderRadius: 30,
         width: "70%",
         height: 45,
@@ -61,6 +58,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         marginLeft: 20,
+        color: 'white'
     },
     loginBtn:
     {
@@ -70,7 +68,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 40,
-        backgroundColor: "#FF1493",
+        backgroundColor: "#17b2e6",
     }
 
 });

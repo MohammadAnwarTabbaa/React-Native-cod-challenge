@@ -27,7 +27,10 @@ const HomeStack = (props) => {
     )
     const AuthStackScreen = () => (
         <AuthStack.Navigator>
-            <AuthStack.Screen name='login' component={LoginScreen} />
+            <AuthStack.Screen name='Login' component={LoginScreen} options={{
+                title: 'Login',
+                headerTitleAlign: 'center'
+            }} />
         </AuthStack.Navigator>
     );
 
